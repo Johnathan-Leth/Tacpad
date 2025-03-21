@@ -23,40 +23,43 @@ if (EXISTS ${picoVscode})
     include(${picoVscode})
 endif()
 # ====================================================================================
-set(PICO_BOARD pico2_w CACHE STRING "Board type")
+set(PICO_BOARD pico CACHE STRING "Board type")
 
 # Pull in Raspberry Pi Pico SDK (must be before project)
 include(pico_sdk_import.cmake)
 
-project(Wireless_connectivity C CXX ASM)
+project(HID C CXX ASM)
 
 # Initialise the Raspberry Pi Pico SDK
 pico_sdk_init()
 
 # Add executable. Default name is the project name, version 0.1
 
-add_executable(Wireless_connectivity Wireless_connectivity.c )
+add_executable(HID HID.cpp )
 
-pico_set_program_name(Wireless_connectivity "Wireless_connectivity")
-pico_set_program_version(Wireless_connectivity "0.1")
+pico_set_program_name(HID "HID")
+pico_set_program_version(HID "0.1")
+
+# Generate PIO header
+pico_generate_pio_header(HID ${CMAKE_CURRENT_LIST_DIR}/blink.pio)
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(Wireless_connectivity 0)
-pico_enable_stdio_usb(Wireless_connectivity 0)
+pico_enable_stdio_uart(HID 0)
+pico_enable_stdio_usb(HID 0)
 
 # Add the standard library to the build
-target_link_libraries(Wireless_connectivity
+target_link_libraries(HID
         pico_stdlib)
 
 # Add the standard include files to the build
-target_include_directories(Wireless_connectivity PRIVATE
+target_include_directories(HID PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}
 )
 
 # Add any user requested libraries
-target_link_libraries(Wireless_connectivity 
-        pico_cyw43_arch_none
+target_link_libraries(HID 
+        hardware_pio
         )
 
-pico_add_extra_outputs(Wireless_connectivity)
+pico_add_extra_outputs(HID)
 
