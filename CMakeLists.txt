@@ -44,6 +44,9 @@ pico_set_program_version(main "0.1")
 pico_enable_stdio_uart(main 0)
 pico_enable_stdio_usb(main 0)
 
+# Ensure the include folder is read in
+include_directories(include)
+
 # Add the standard and tiny USB library to the build
 target_link_libraries(main
         pico_stdlib tinyusb_device tinyusb_board tinyusb_hid)

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
-#include "bsp/board.h"
+//#include "bsp/board.h"
 #include "tusb.h"
 
 // GPIO matrix
@@ -12,7 +12,7 @@ const uint8_t gpio_pins[3][3] = {
 
 // Keyboard matrix
 const uint8_t keycodes[3][3] = {
-    {HID_USAGE_KEY_1, HID_KEY_2, HID_KEY_3},
+    {HID_KEY_1, HID_KEY_2, HID_KEY_3},
     {HID_KEY_4, HID_KEY_5, HID_KEY_6},
     {HID_KEY_7, HID_KEY_8, HID_KEY_9}
 };
